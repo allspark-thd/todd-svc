@@ -1,0 +1,13 @@
+build:
+  image: node:5
+  environment:
+    - VAULT_URL=http://127.0.0.1:8200
+  commands:
+    - npm install
+    - npm test
+  link:
+    - vault
+
+compose:
+  vault:
+    image: joshq00/vault:dev
