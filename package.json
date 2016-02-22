@@ -1,0 +1,28 @@
+{
+  "name": "todd-svc",
+  "version": "0.1.0",
+  "description": "PCF App -> Vault middleman",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start --single-run"
+  },
+  "keywords": [
+    "pcf",
+    "vault",
+    "service",
+    "broker",
+    "exchange",
+    "cloud",
+    "foundry"
+  ],
+  "author": [
+    "Ken Bailey <ken_bailey@homedepot.com>",
+    "Josh Quintana <josh_d_quintana@homedepot.com"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "karma": "^0.13.21",
+    "karma-mocha": "^0.2.2",
+    "mocha": "^2.4.5"
+  }
+}
