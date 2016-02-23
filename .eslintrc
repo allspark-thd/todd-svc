@@ -24,7 +24,7 @@ templateStrings: true
 rules:
   block-scoped-var: 0
   brace-style: [2, 1tbs, allowSingleLine: false]
-  camelcase: 2
+  camelcase: 0
   comma-spacing: 2
   comma-style: [2, last]
   complexity: [1, 11]

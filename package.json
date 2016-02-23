@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node src/index",
+    "lint": "eslint src",
     "test": "mocha --compilers js:babel-register 'src/**/*-test.js'"
   },
   "keywords": [

@@ -15,6 +15,7 @@ build:
     - vault/seed.sh > /dev/null
     - npm install
     - npm test
+    - npm run lint
   link:
     - vault
 
