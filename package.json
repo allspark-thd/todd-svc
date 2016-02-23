@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "description": "PCF App -> Vault middleman",
   "main": "index.js",
+  "engines": {
+    "node": ">=5"
+  },
   "scripts": {
+    "start": "node src/index",
     "test": "mocha --compilers js:babel-register 'src/**/*-test.js'"
   },
   "keywords": [

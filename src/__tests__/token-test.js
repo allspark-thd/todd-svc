@@ -3,19 +3,17 @@
 import { expect } from 'chai';
 import rp from 'request-promise';
 import toddsvc from '../';
-import initVault from './initVault';
 
 describe( "/auth/token", () => {
 		var server, url;
-		beforeEach( done => {
-			initVault().then( () => done(), done );
+		beforeEach( () => {
 			// initialize server
 			server = toddsvc();
 			url = 'http://localhost:' + server.address().port + '/auth/token';
-			} );
+		} );
 		afterEach( () => {
 			server.close();
-			} );
+		} );
 
 
 		describe( 'POST', () => {

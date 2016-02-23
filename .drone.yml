@@ -3,6 +3,7 @@ build:
   environment:
     - VAULT_URL=http://127.0.0.1:8200
   commands:
+    - vault/seed.sh > /dev/null
     - npm install
     - npm test
   link:
