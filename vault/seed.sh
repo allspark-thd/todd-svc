@@ -38,7 +38,7 @@ curl -s -X POST \
 curl -s -X PUT \
   -H "X-Vault-Token: $VAULT_TOKEN" \
   -d '{
-    "rules": "path \"secret/svcinstance123/*\" {\n  policy = \"write\"\n}\n\npath \"auth/app-id/map/app-id/*\" { \n  policy = \"write\"\n}\n\npath \"auth/app-id/map/user-id/pcf_id\" {\n policy = \"write\"\n}\n\npath \"auth/token/create-orphan\" {\n policy = \"write\"\n}\n"
+    "rules": "path \"secret/some-secret-namespace/*\" {\n  policy = \"write\"\n}\n\npath \"auth/app-id/map/app-id/*\" { \n  policy = \"write\"\n}\n\npath \"auth/app-id/map/user-id/pcf-space-id\" {\n policy = \"write\"\n}\n\npath \"auth/token/create-orphan\" {\n policy = \"write\"\n}\n"
   }' $VAULT_URL/v1/sys/policy/pcfpol
 
 # lookup that policy
@@ -47,24 +47,27 @@ curl -s -H "X-Vault-Token: $VAULT_TOKEN" \
   $VAULT_URL/v1/sys/policy/pcfpol | jq '.'
 
 
-# map `pcf_id` app
+# map `pcf-space-id` app
 curl -s -X POST \
   -d '{"value":"pcfpol"}' \
   -H "X-Vault-Token:$VAULT_TOKEN" \
-  $VAULT_URL/v1/auth/app-id/map/app-id/pcf_id
+  $VAULT_URL/v1/auth/app-id/map/app-id/pcf-space-id
 
-# map `app_id1` user
+# map `pcf-service-instance-id` user
 curl -s -X POST \
-  -d '{"value":"pcf_id"}' \
+  -d '{"value":"pcf-space-id"}' \
   -H "X-Vault-Token:$VAULT_TOKEN" \
-  $VAULT_URL/v1/auth/app-id/map/user-id/app_id1
+  $VAULT_URL/v1/auth/app-id/map/user-id/pcf-service-instance-id
 
 
 
-# login as that pcf_id/app_id1
+# login as that pcf-space-id/pcf-service-instance-id
 LOGIN_INFO=$(
 curl -s \
-  -d '{"app_id":"pcf_id", "user_id":"app_id1"}' \
+  -d '{
+    "app_id": "pcf-space-id",
+    "user_id":"pcf-service-instance-id"
+  }' \
   $VAULT_URL/v1/auth/app-id/login
 )
 
@@ -81,9 +84,9 @@ echo $CLIENT_TOKEN
 curl -s -X POST \
   -d '{ "db_username":"dbuname1", "db_password":"dbpword1" }' \
   -H "X-Vault-Token: $CLIENT_TOKEN" \
-  $VAULT_URL/v1/secret/svcinstance123/db
-  # $VAULT_URL/v1/secret/app_id1
+  $VAULT_URL/v1/secret/some-secret-namespace/db
+  # $VAULT_URL/v1/secret/pcf-service-instance-id
 
 curl -s \
   -H "X-Vault-Token: $CLIENT_TOKEN" \
-  $VAULT_URL/v1/secret/svcinstance123/db | jq '.'
+  $VAULT_URL/v1/secret/some-secret-namespace/db | jq '.'
