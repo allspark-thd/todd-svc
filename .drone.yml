@@ -1,6 +1,11 @@
 clone:
   skip_verify: true
 
+cache:
+  mount:
+  - node_modules
+  - jq
+
 build:
   image: node:5
   environment:
