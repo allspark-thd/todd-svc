@@ -4,7 +4,8 @@ clone:
 build:
   image: node:5
   environment:
-    - VAULT_URL=http://127.0.0.1:8200
+    - VAULT_URL=http://localhost:8200
+    - NO_PROXY=localhost,127.0.0.1
   commands:
     - vault/seed.sh > /dev/null
     - npm install
