@@ -1,3 +1,6 @@
+clone:
+  skip_verify: true
+
 build:
   image: node:5
   environment:
