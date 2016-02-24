@@ -1,5 +1,7 @@
 #!/bin/bash
 PATH=".:$PATH"
+echo "Using vault url: ${VAULT_URL}"
+
 command -v jq >/dev/null 2>&1 || {
   echo "Download jq";
   curl -sLo jq \

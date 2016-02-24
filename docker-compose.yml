@@ -1,0 +1,15 @@
+web:
+  build: .
+  ports:
+  - "3000:3000"
+  volumes:
+  - build.js:/app
+  - ./vault/seed.sh:/seed.sh
+  links:
+  - vault
+  entrypoint: [ 'bash', '-c', '/seed.sh > /dev/null && node /app' ]
+  environment:
+  - VAULT_URL=http://vault:8200
+
+vault:
+  image: joshq00/vault:dev
