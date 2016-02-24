@@ -27,3 +27,7 @@ build/Release
 node_modules
 *.swp
 jq
+
+coverage
+build.js
+input.json
