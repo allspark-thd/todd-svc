@@ -31,3 +31,4 @@ jq
 coverage
 build.js
 input.json
+.drone.sec.yml

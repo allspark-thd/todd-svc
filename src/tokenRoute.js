@@ -36,7 +36,7 @@ router.post( '/:space/:service',
 		} )
 		.then( responseBody =>
 			res.json( { token: responseBody.auth.client_token } ),
-			vaultResp => vaultResp.pipe( res ) )
+			vaultResp => res.status( vaultResp.statusCode ).end( vaultResp.body ) )
 );
 
 export default router;
