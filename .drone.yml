@@ -1,23 +1,43 @@
 clone:
   skip_verify: true
 
+
 cache:
   mount:
   - node_modules
   - jq
 
+
 build:
-  image: node:5
-  environment:
+  deps:
+    image: node:$$NODE_VERSION
+    commands:
+    - npm install
+
+  test:
+    image: node:$$NODE_VERSION
+    environment:
     - VAULT_URL=http://localhost:8200
     - NO_PROXY=localhost,127.0.0.1
-  commands:
+    commands:
     - vault/seed.sh > /dev/null
-    - npm install
-    - npm test
+    - npm test -- --color
     - npm run lint
-  link:
+    link:
     - vault
+
+  server:
+    image: node:$$NODE_VERSION
+    commands:
+    - npm run build
+
+
+matrix:
+  NODE_VERSION:
+  - 5
+  - 4
+  - 0
+
 
 compose:
   vault:
