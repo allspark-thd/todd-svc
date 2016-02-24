@@ -42,3 +42,16 @@ matrix:
 compose:
   vault:
     image: joshq00/vault:dev
+
+
+deploy:
+  cloudfoundry:
+    api: api.run-np.homedepot.com
+    org: jq-org
+    space: development
+    user: $$USER
+    password: $$PASSWORD
+    when:
+      branch: 'master'
+      matrix:
+        NODE_VERSION: 5
